@@ -17,8 +17,12 @@ def recordRecentFile():
 
 def saveFileNameToRecentFile(fileName):
     maxRecentFileRecord = 10
-    with open(recentFileFileName) as f:
-        recentFiles = f.readlines()
+    recentFiles = []
+    try:
+        with open(recentFileFileName) as f:
+            recentFiles = f.readlines()
+    except:
+        pass
 
     with open(recentFileFileName,"w") as f:
         if fileName + "\n" in recentFiles:
@@ -32,6 +36,7 @@ def saveFileNameToRecentFile(fileName):
         f.writelines(recentFiles)
 
 def show():
+    win = None
     if hasattr(vim,'win') :
         win = vim.win
     if win != None:
